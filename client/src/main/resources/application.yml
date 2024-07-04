@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: client
+  docker:
+    compose:
+      enabled: true
+      file: compose.yaml
+      lifecycle-management: start_and_stop
+  flyway:
+    locations: classpath:db/migration/{vendor}
+    enabled: true
+
+server:
+  error:
+    include-stacktrace: never
+
+logging:
+  level:
+    root: info
