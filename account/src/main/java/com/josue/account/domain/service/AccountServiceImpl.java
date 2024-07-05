@@ -8,6 +8,7 @@ import com.josue.account.domain.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.util.StringUtils;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -89,5 +90,10 @@ public class AccountServiceImpl implements AccountService {
                     return account;
                 })
                 .toList();
+    }
+
+    @Override
+    public List<Account> reportByParam(OffsetDateTime dateFrom, OffsetDateTime dateTo, List<String> clientIds) {
+        return accountRepository.reportByParam(dateFrom, dateTo, clientIds);
     }
 }

@@ -2,6 +2,7 @@ package com.josue.account.domain.service;
 
 import com.josue.account.domain.entities.Account;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public interface AccountService {
@@ -18,4 +19,5 @@ public interface AccountService {
 
     List<Account> getAll();
 
+    List<Account> reportByParam(OffsetDateTime dateFrom, OffsetDateTime dateTo, List<String> clientIds);
 }

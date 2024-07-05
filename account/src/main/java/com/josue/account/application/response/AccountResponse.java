@@ -2,15 +2,15 @@ package com.josue.account.application.response;
 
 import com.josue.account.domain.entities.AccountStatus;
 import com.josue.account.domain.entities.AccountType;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
 @Getter
 @ToString
-@Builder
+@SuperBuilder
 public class AccountResponse {
 
     private String id;

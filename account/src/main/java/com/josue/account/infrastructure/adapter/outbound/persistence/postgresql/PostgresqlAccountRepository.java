@@ -4,11 +4,20 @@ import com.josue.account.domain.entities.Account;
 import com.josue.account.domain.entities.Transaction;
 import com.josue.account.domain.exception.NotFoundEntityException;
 import com.josue.account.domain.repository.AccountRepository;
+import com.josue.account.infrastructure.adapter.outbound.persistence.postgresql.entities.AccountEntity;
+import com.josue.account.infrastructure.adapter.outbound.persistence.postgresql.entities.AccountEntity_;
+import com.josue.account.infrastructure.adapter.outbound.persistence.postgresql.entities.TransactionEntity_;
 import com.josue.account.infrastructure.adapter.outbound.persistence.postgresql.mapper.AccountEntityMapper;
 import com.josue.account.infrastructure.adapter.outbound.persistence.postgresql.mapper.TransactionEntityMapper;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -80,5 +89,56 @@ public class PostgresqlAccountRepository implements AccountRepository {
 
         repository.save(account);
         return true;
+    }
+
+    @Override
+    public List<Account> reportByParam(OffsetDateTime dateFrom, OffsetDateTime dateTo, List<String> clientIds) {
+        return repository.findAll(
+                        Specification.where(filterByDateAndAccountIds(dateFrom, dateTo, clientIds))
+                )
+                .stream()
+                .map(AccountEntityMapper::toDomain)
+                .toList();
+    }
+
+    private Specification<AccountEntity> filterByDateAndAccountIds(OffsetDateTime dateFrom,
+                                                                   OffsetDateTime dateTo,
+                                                                   List<String> clientIds
+    ) {
+        return (root, query, cb) -> {
+            root.fetch(AccountEntity_.TRANSACTIONS, JoinType.LEFT);
+            root.fetch(AccountEntity_.LAST_TRANSACTION, JoinType.LEFT);
+
+            var predicates = new ArrayList<Predicate>();
+            if (!CollectionUtils.isEmpty(clientIds)) {
+                predicates.add(
+                        cb.in(root.get(AccountEntity_.CLIENT_ID)).value(clientIds)
+                );
+            }
+            if (dateFrom != null && dateTo != null) {
+                predicates.add(
+                        cb.between(
+                                root.get(AccountEntity_.TRANSACTIONS).get(TransactionEntity_.DATE),
+                                dateFrom,
+                                dateTo
+                        )
+                );
+            } else if (dateFrom != null) {
+                predicates.add(
+                        cb.greaterThanOrEqualTo(
+                                root.get(AccountEntity_.TRANSACTIONS).get(TransactionEntity_.DATE),
+                                dateFrom
+                        )
+                );
+            } else if (dateTo != null) {
+                predicates.add(
+                        cb.lessThanOrEqualTo(
+                                root.get(AccountEntity_.TRANSACTIONS).get(TransactionEntity_.DATE),
+                                dateTo
+                        )
+                );
+            }
+            return cb.and(predicates.toArray(Predicate[]::new));
+        };
     }
 }

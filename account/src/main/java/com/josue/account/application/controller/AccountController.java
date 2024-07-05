@@ -2,8 +2,10 @@ package com.josue.account.application.controller;
 
 import com.josue.account.application.mapper.AccountMapper;
 import com.josue.account.application.request.AccountCreateRequest;
+import com.josue.account.application.request.AccountReportRequest;
 import com.josue.account.application.request.AccountUpdateRequest;
 import com.josue.account.application.response.AccountResponse;
+import com.josue.account.application.response.AccountWithTransactionResponse;
 import com.josue.account.domain.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -71,6 +73,19 @@ public class AccountController {
                 .publishOn(Schedulers.boundedElastic())
                 .flatMap(domain -> Mono.fromCallable(() -> accountService.delete(domain)))
                 .map(result -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+    }
+
+    @GetMapping("/reportes")
+    public Flux<AccountWithTransactionResponse> reportByParam(
+            @Valid AccountReportRequest request
+    ) {
+        return Mono.fromCallable(() -> accountService.reportByParam(request.getDateFrom(),
+                                                                    request.getDateTo(),
+                                                                    request.getClientIds()
+                ))
+                .publishOn(Schedulers.boundedElastic())
+                .flatMapMany(Flux::fromIterable)
+                .map(AccountMapper::toResponseWithTransaction);
     }
 
 }
