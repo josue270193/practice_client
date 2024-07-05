@@ -68,7 +68,16 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> getAll() {
         var result = accountRepository.getAll();
+        return getAccountsWithName(result);
+    }
 
+    @Override
+    public List<Account> reportByParam(OffsetDateTime dateFrom, OffsetDateTime dateTo, List<String> clientIds) {
+        var result = accountRepository.reportByParam(dateFrom, dateTo, clientIds);
+        return getAccountsWithName(result);
+    }
+
+    private List<Account> getAccountsWithName(List<Account> result) {
         var clientIdList = result.stream()
                 .map(Account::getClientId)
                 .filter(StringUtils::hasText)
@@ -90,10 +99,5 @@ public class AccountServiceImpl implements AccountService {
                     return account;
                 })
                 .toList();
-    }
-
-    @Override
-    public List<Account> reportByParam(OffsetDateTime dateFrom, OffsetDateTime dateTo, List<String> clientIds) {
-        return accountRepository.reportByParam(dateFrom, dateTo, clientIds);
     }
 }
