@@ -54,4 +54,12 @@ public class ClientServiceImpl implements ClientService {
         return result
                 .toList();
     }
+
+    @Override
+    public List<Client> getAllByIds(List<String> ids) {
+        var result = clientRepository.getAllByIds(ids)
+                .stream();
+        return result
+                .toList();
+    }
 }

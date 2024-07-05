@@ -10,9 +10,10 @@ import java.time.OffsetDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 public class Person {
 
+    private String id;
     // UNIQUE
     private String documentNumber;
     private String name;

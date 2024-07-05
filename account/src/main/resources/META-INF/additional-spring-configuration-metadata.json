@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "app.client-url",
+      "type": "java.lang.String",
+      "description": "Host del modulo de clientes."
+  }
+] }

@@ -17,4 +17,5 @@ public interface ClientRepository {
 
     List<Client> getAll();
 
+    List<Client> getAllByIds(List<String> ids);
 }

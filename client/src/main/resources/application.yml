@@ -5,15 +5,26 @@ spring:
     compose:
       enabled: true
       file: compose.yaml
-      lifecycle-management: start_and_stop
+      lifecycle-management: start_only
   flyway:
     locations: classpath:db/migration/{vendor}
     enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show_sql: true
 
 server:
   error:
     include-stacktrace: never
+    whitelabel:
+      enabled: false
+  port: 8080
 
 logging:
   level:
     root: info
+    web: DEBUG
+    org:
+      springframework:
+        data: DEBUG

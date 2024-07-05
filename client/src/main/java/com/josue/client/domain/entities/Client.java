@@ -1,6 +1,9 @@
 package com.josue.client.domain.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
@@ -10,8 +13,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 public class Client extends Person {
 
-    // UNIQUE
-    private String id;
     private String password;
     private ClientStatus status;
 

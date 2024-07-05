@@ -11,10 +11,11 @@ import java.time.OffsetDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class Transaction {
 
     private String id;
+    private String accountId;
     private OffsetDateTime date;
     private TransactionType type;
     private BigDecimal amount;

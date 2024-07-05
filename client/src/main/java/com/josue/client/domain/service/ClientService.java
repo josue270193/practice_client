@@ -16,6 +16,7 @@ public interface ClientService {
 
     Client getById(String id);
 
-    List<Client > getAll();
+    List<Client> getAll();
 
+    List<Client> getAllByIds(List<String> ids);
 }
