@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "1e7a934e-4641-43eb-bc53-86362878daaa",
+		"name": "Transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1850619",
+		"_collection_link": "https://josuelopez27.postman.co/workspace/devsu_challenge~5970ee19-ce18-4d0e-8932-799c1849c00b/collection/1850619-1e7a934e-4641-43eb-bc53-86362878daaa?action=share&source=collection_link&creator=1850619"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/movimientos",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"movimientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountId\": \"bed3a16c-188d-4e62-bdeb-75e5269a83b5\",\n    \"amount\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/movimientos",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"movimientos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

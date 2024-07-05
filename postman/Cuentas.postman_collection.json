@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "bd38ed5b-f81b-499b-89b0-99412c2cc472",
+		"name": "Cuentas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1850619",
+		"_collection_link": "https://josuelopez27.postman.co/workspace/devsu_challenge~5970ee19-ce18-4d0e-8932-799c1849c00b/collection/1850619-bd38ed5b-f81b-499b-89b0-99412c2cc472?action=share&source=collection_link&creator=1850619"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cuentas",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cuentas/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "bed3a16c-188d-4e62-bdeb-75e5269a83b5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reporte",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cuentas/reportes?dateFrom=2000-01-01T00:00:00Z&dateTo=2024-07-05T19:22:37Z&clientIds=d1c5343a-d5ad-4341-ade0-d8ae1d8022c2",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas",
+						"reportes"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "2000-01-01T00:00:00Z"
+						},
+						{
+							"key": "dateTo",
+							"value": "2024-07-05T19:22:37Z"
+						},
+						{
+							"key": "clientIds",
+							"value": "d1c5343a-d5ad-4341-ade0-d8ae1d8022c2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientId\": \"d1c5343a-d5ad-4341-ade0-d8ae1d8022c2\",\n    \"number\": \"00121\",\n    \"type\": \"SAVING\",\n    \"initialBalance\": 100.00,\n    \"status\": \"TRUE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cuentas",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"number\": \"00100\",\n        \"type\": \"SAVING\",\n        \"initialBalance\": 100.00,\n        \"status\": \"TRUE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cuentas/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3758b9a2-b481-40a3-8b71-3b06f0bfdc9a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cuentas/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cuentas",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "80016034-8b77-4463-a2ff-dfb1fd978f5c"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "2dda01de-f719-49cb-899a-2ea25a4d7800",
+		"name": "Clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1850619",
+		"_collection_link": "https://josuelopez27.postman.co/workspace/devsu_challenge~5970ee19-ce18-4d0e-8932-799c1849c00b/collection/1850619-2dda01de-f719-49cb-899a-2ea25a4d7800?action=share&source=collection_link&creator=1850619"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clientes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ids\": [ \"d1c5343a-d5ad-4341-ade0-d8ae1d8022c2\", \"\" ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clientes/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "d1c5343a-d5ad-4341-ade0-d8ae1d8022c2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"documentNumber\": \"100\",\n    \"name\": \"Client 100\",\n    \"gender\": \"MALE\",\n    \"bornDate\": \"2000-01-01T00:00:00Z\",\n    \"address\": \"address client 100\",\n    \"phoneNumber\": \"+100\",\n    \"password\": \"100\",\n    \"status\": \"TRUE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clientes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test3\",\n    \"gender\": \"MALE\",\n    \"bornDate\": \"2024-01-01T00:00:00Z\",\n    \"address\": \"address3\",\n    \"phoneNumber\": \"+12312313\",\n    \"password\": \"1233\",\n    \"status\": \"ACTIVE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2d2e419e-ae91-430e-a893-601f7a20563d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/clientes/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2d2e419e-ae91-430e-a893-601f7a20563d"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
