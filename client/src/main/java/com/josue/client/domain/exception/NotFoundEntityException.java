@@ -38,4 +38,7 @@ public class NotFoundEntityException extends RepositoryException {
         return this.params;
     }
 
+    public String getEntity() {
+        return entity;
+    }
 }
