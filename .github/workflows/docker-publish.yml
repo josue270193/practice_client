@@ -66,7 +66,10 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
+      - name: Execute UnitTest
+        id: unit-test
+        run: ./gradlew test
       - name: Build and push Docker image
         id: build-and-push
         run: ./gradlew bootBuildImage

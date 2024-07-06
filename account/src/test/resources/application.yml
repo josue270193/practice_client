@@ -1,0 +1,4 @@
+app:
+  client-url: http://localhost:8080/clientes
+server:
+  port: 8081

@@ -1,22 +1,31 @@
-package com.josue.client;
+package karate;
 
-import org.junit.jupiter.api.Test;
+import com.intuit.karate.junit5.Karate;
+import com.josue.account.AccountApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = {AccountApplication.class})
 @Testcontainers
-class ClientApplicationTests {
+class KarateTests {
 
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
-    @Test
-    void contextLoads() {
+    @Karate.Test
+    Karate dummyTest() {
+        return Karate.run("classpath:karate/dummy.feature");
     }
+
+    @Karate.Test
+    Karate accountCreateTest() {
+        return Karate.run("classpath:karate/account/create.feature");
+    }
+
+
 
 }
