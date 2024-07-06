@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  client:
+    image: josue270193/client:0.0.1-SNAPSHOT
+    ports:
+      - '8080:8080'
+    environment:
+      DB_URL: postgres:5432/practice_client
+      DB_USER: practice_postgres
+      DB_PASSWORD: practice_postgres
+    networks:
+      - practice_client_network
+
+  account:
+    image: josue270193/account:0.0.1-SNAPSHOT
+    ports:
+      - '8081:8081'
+    environment:
+      DB_URL: postgres:5432/practice_account
+      DB_USER: practice_postgres
+      DB_PASSWORD: practice_postgres
+      CLIENT_URL: client:8080/clientes
+    networks:
+      - practice_client_network
+
+  postgres:
+    image: 'postgres:16-alpine'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=practice_postgres
+      - POSTGRES_PASSWORD=practice_postgres
+      - POSTGRES_MULTIPLE_DATABASES=practice_client,practice_account
+    networks:
+      - practice_client_network
+
+networks:
+  practice_client_network:
+    driver: bridge

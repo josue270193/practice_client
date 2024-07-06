@@ -53,3 +53,14 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.named("bootBuildImage") {
+    imageName.set("docker.io/josue270193/${project.name}:${project.version}")
+    publish = true
+    docker {
+        publishRegistry {
+            username = System.getenv('DOCKER_USER')
+            password = System.getenv('DOCKER_PASSWORD')
+        }
+    }
+}
